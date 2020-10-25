@@ -1,0 +1,5 @@
+Respuesta Enero	-19
+Respuesta Febrero	91
+Respuesta Marzo	55
+Respuesta Abril	-91
+Respuesta Mayo	19

@@ -1,0 +1,15 @@
+tsuru	rojo	nsd1025
+vento	gris	2547gtr
+corsa	gris	pwr2463
+versa	negro	3796mts
+sonic	plata	mty5874
+aveo	oro	htf1743
+fiesta	azul	jty4587
+polo	negro	snp8742
+creta	azul	8789lre
+rio	verde	fcd5789
+lobo	blanco	6587plt
+sentra	azul	4587ltr
+golf	rojo	4785wtb
+ibiza	negro	hty1289
+atos	blanco	edr4570

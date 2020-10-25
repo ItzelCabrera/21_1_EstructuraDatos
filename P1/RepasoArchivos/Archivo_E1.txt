@@ -1,0 +1,5 @@
+Enero	25	45	89
+Febrero	30	73	12
+Marzo	48	25	18
+Abril	64	31	186
+Mayo	87	02	70

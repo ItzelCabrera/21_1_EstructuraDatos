@@ -7,7 +7,7 @@
 
 typedef struct _NODO{
     float dato;
-    struct _Nodo *siguiente;
+    struct _NODO *siguiente;
 }Nodo;
 
 Nodo * crear(float d){

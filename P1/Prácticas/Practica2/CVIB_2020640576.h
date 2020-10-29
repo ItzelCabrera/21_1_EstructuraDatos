@@ -10,7 +10,7 @@ typedef struct _NODO{
     char marca[25];
     char color[25];
     char placa[25];
-    struct _Nodo *siguiente;
+    struct _NODO *siguiente;
 }Nodo;
 
 Nodo * crear(char m[],char c[],char p[]){

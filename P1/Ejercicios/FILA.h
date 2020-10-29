@@ -5,7 +5,7 @@
 
 typedef struct _NODO{
     int dato;
-    struct _Nodo *siguiente;
+    struct _NODO *siguiente;
 }Nodo;
 
 

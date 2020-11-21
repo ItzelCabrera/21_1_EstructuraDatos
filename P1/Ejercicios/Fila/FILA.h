@@ -2,80 +2,68 @@
 #define _FILA_H_
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h>
-#include<time.h>
-
 
 typedef struct _NODO{
-    char marca[25];
-    char color[25];
-    char placa[25];
+    int dato;
     struct _NODO *siguiente;
 }Nodo;
 
-Nodo * crear(char m[],char c[],char p[]){
+
+Nodo * crear(int d){
     Nodo * nuevo;
     nuevo = (Nodo *)malloc(sizeof(Nodo)); //si malloc no logra retornar un puntero va a retornar un null 0 o un -1 --> por lo tanto, hay que realizar una comparación y manejar un error
-    strcpy(nuevo->marca,m);
-    strcpy(nuevo->color,c);
-    strcpy(nuevo->placa,p);
+    nuevo->dato = d;
     nuevo->siguiente = NULL;
 
     return nuevo;
 }
 
-
-/*OPERACION ALTA O PUSH
--Retorna una variable de tipo puntero nodo
--Debe recibir la frente y el dato que se guarda en la cajita (d)
-*/
-
-Nodo * insertarElem(Nodo * frente,char m[],char c[],char p[]){
+//OPERACION PUSH
+Nodo * insertarElem(Nodo * frente, int d){
     Nodo * nuevo;
-    nuevo = crear(m,c,p);
+    nuevo = crear(d);
 
-    //si no hay nada, la cajita de referencia será la antes creada
+    //si no hay nada, el elemento a insertar será "nuevo"
     if (frente == NULL){
         frente = nuevo;
     }else{
         Nodo *aux;
         aux = frente;
-        while(aux->siguiente != NULL){//se recorre hasta llegar a la ultima cajita
+        while(aux->siguiente != NULL){//se recorre hasta llegar al ult elemento
             aux = aux->siguiente;
         }
-        aux->siguiente = nuevo; //se referencia la cajita nueva al siguiente lugar disponible
+        aux->siguiente = nuevo; //el siguiente elem(ultimo) será "nuevo"
     }
 
     return frente;
 }
 
-
+//OPERACION POP
 Nodo *sacarElem(Nodo * frente){
     Nodo * aux;
     aux = frente; //se referencia al frente
     //corregir un posible underflow
-    if (frente != NULL){//hay por lo menos una cajita en la fila
+    if (frente != NULL){
         frente = frente->siguiente;
         free(aux);
     }else{
-        printf("No hay elementos en la fila");
+        printf("\nNo hay elementos en la fila");
     }
     return frente;
 }
+
+
 
 void ver (Nodo * frente){
     if(frente == NULL){
         printf("\nNo hay ningun elemento en la fila\n");
     }else{
         while(frente != NULL){
-            printf("\nMarca: %s",frente->marca);
-            printf("\tColor: %s",frente->color);
-            printf("\tPlaca: %s",frente->placa);
+            printf("\nDato: %d",frente->dato);
             frente = frente->siguiente;
         }
     }
 }
-
 
 
 int contar (Nodo * frente){
@@ -92,31 +80,38 @@ int contar (Nodo * frente){
     }
 }
 
-//Lee un archivo y de lo leído lo pasa a una fila
+
+//Lee un archivo y lo que lee lo acomoda en una fila
 Nodo * insertar_F(Nodo * frente, FILE * FL){
-    char m[25],c[25],p[25];
+    char tittle[15];
+
+    fscanf(FL,"%s\n",&tittle);
+
+    //printf("\nTITULO %s\n",tittle);
+
     while(feof(FL) == 0){
-        fscanf(FL,"%s\t%s\t%s\n",&m,&c,&p);
-        frente = insertarElem(frente,m,c,p);
+        int d;
+        fscanf(FL,"%i\n",&d); //lee el flujo y va almacenando lo leido en las variables
+        //printf("%d\n",d);
+        frente = insertarElem(frente,d);
     }
 
     return frente;
 }
 
 
-//Una fila lo pasa a un archivo
+//Escribe en un fichero los elementos de una fila
 void sacar_F(Nodo * frente, FILE * FE){
-    char tittle[15] = "Fila Final";
+    char tittle[15] = "PILA";
     if(frente == NULL){
-        printf("\nNo hay ningun elemento en la fia que se pueda escribir en el archivo\n");
+        printf("\nNo hay ningun elemento en la pila que se pueda escribir en el archivo\n");
     }else{
         while(frente != NULL){
         //hay que ir moviendo las cimas hasta llegar a null
-        fprintf(FE,"%s\t%s\t%s\n",frente->marca,frente->color,frente->placa);
+        fprintf(FE,"%d\n",frente->dato);
         frente = frente->siguiente;
         }
     }
 }
 #endif
-
 
